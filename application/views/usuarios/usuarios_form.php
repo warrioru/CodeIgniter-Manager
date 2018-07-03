@@ -43,7 +43,7 @@
         </div>
 	    <div class="form-group">
             <label for="varchar">Password <?php echo form_error('password') ?></label>
-            <input type="text" class="form-control" name="password" id="password" placeholder="Password" value="<?php echo $password; ?>" />
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password" value="<?php echo $password; ?>" />
         </div>
 	    <div class="form-group">
             <label for="tinyint">Is Active <?php echo form_error('is_active') ?></label>
@@ -59,6 +59,7 @@
             <select class="form-control" name="id_role_fk" id="id_role_fk">
 				<option value="1">Admin</option>
 				<option value="2">Vendedor</option>
+                <option value="3">Transportista</option>
 			</select>
         </div>
 	    <input type="hidden" name="id" value="<?php echo $id; ?>" /> 

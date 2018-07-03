@@ -11,7 +11,7 @@
 				<li><a href="<?php echo base_url();?>index.php/vinos"><svg
 							class="glyph stroked home">
 							<use xlink:href="#stroked-home"></use></svg></a></li>
-				<li class="active">Detalles de Pedido</li>
+				<li class="active">Detalles de Entrega</li>
 			</ol>
 		</div>
 		<!--/.row-->
@@ -31,9 +31,13 @@
         <table class="table">
 	    <tr><td>NombreCliente</td><td><?php echo $nombreCliente; ?></td></tr>
 	    <tr><td>NumFactura</td><td><?php echo $numFactura; ?></td></tr>
+	    <tr><td>FechaEntrega</td><td><?php echo $fechaEntrega; ?></td></tr>
+	    <tr><td>Direccion</td><td><?php echo $direccion; ?></td></tr>
+	    <tr><td>Observaciones</td><td><?php echo $observaciones; ?></td></tr>
 	    <tr><td>Estado</td><td><?php echo $estado; ?></td></tr>
 	    <tr><td>Id Encargado Fk</td><td><?php echo $id_encargado_fk; ?></td></tr>
-	    <tr><td></td><td><a href="<?php echo site_url('pedidos') ?>" class="btn btn-default">Cancel</a></td></tr>
+	    <tr><td>Id Vendedor Fk</td><td><?php echo $id_vendedor_fk; ?></td></tr>
+	    <tr><td></td><td><a href="<?php echo site_url('entregas') ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>
 	</div>
 				</div>

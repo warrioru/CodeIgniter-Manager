@@ -18,7 +18,7 @@ class VerifyLogin extends CI_Controller {
  {
    //This method will have the credentials validation
    $this->load->library('form_validation');
-   $this->form_validation->set_rules('username', 'Username', 'trim|required|callback_username_check',
+   $this->form_validation->set_rules('email', 'Username', 'trim|required|callback_username_check',
     array('required' => '%s no puede estar vacio')
     );
    $this->form_validation->set_rules('password', 'Password', 'trim|required|callback_check_database',
@@ -57,7 +57,7 @@ class VerifyLogin extends CI_Controller {
  function check_database($password)
  {
    //Field validation succeeded.  Validate against database
-   $username = $this->input->post('username');
+   $username = $this->input->post('email');
 
    //query the database
    $result = $this->user->login($username, $password);
@@ -76,7 +76,7 @@ class VerifyLogin extends CI_Controller {
          'id' => $row->id,
          'nombre' => $row->first_name,
          'apellido' => $row->last_name,
-         'username' => $row->username,
+         'username' => $row->email,
          'id_role_fk' => $row->id_role_fk,
          'exito' => false
        );

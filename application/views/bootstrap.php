@@ -52,9 +52,9 @@
 			<li class="item"><a href="<?php echo base_url();?>index.php/vinos"><svg
 						class="glyph stroked home">
 						<use xlink:href="#stroked-home"></use></svg>Vinos</a></li>
-			<li ><a href="<?php echo base_url();?>index.php/pedidos"><svg
+			<li ><a href="<?php echo base_url();?>index.php/entregas"><svg
 						class="glyph stroked open folder">
-			<use xlink:href="#stroked-open-folder" /></svg> Pedidos</a></li>
+			<use xlink:href="#stroked-open-folder" /></svg> Entregas</a></li>
 			<li ><a
 				href="<?php echo base_url();?>index.php/accesorios"><svg
 						class="glyph stroked mobile device">

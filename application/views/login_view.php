@@ -30,8 +30,8 @@
 
 			<div class="login-form">
 				<div class="control-group">
-					<input type="text" class="login-field" name="username"
-						placeholder="Usuario" id="username"> <label
+					<input type="text" class="login-field" name="email"
+						placeholder="Usuario" id="email"> <label
 						class="login-field-icon fui-user" for="login-name"></label>
 				</div>
 

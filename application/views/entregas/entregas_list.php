@@ -18,7 +18,7 @@
 
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Lista de Pedidos</h1>
+				<h1 class="page-header">Lista de Entregas</h1>
 			</div>
 		</div>
 		<!--/.row-->
@@ -28,7 +28,7 @@
 					<div class="panel-body">
 						<div class="row" style="margin-bottom: 10px">
 							<div class="col-md-4">
-                <?php echo anchor(site_url('pedidos/create'),'Agregar', 'class="btn btn-primary"'); ?>
+                <?php echo anchor(site_url('entregas/create'),'Agregar', 'class="btn btn-primary"'); ?>
             </div>
 							<div class="col-md-4 text-center">
 								<div style="margin-top: 8px" id="message">
@@ -37,7 +37,7 @@
 							</div>
 							<div class="col-md-1 text-right"></div>
 							<div class="col-md-3 text-right">
-								<form action="<?php echo site_url('pedidos/index'); ?>" class="form-inline" method="get">
+								<form action="<?php echo site_url('entregas/index'); ?>" class="form-inline" method="get">
                     <div class="input-group">
                         <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
                         <span class="input-group-btn">
@@ -45,7 +45,7 @@
                                 if ($q <> '')
                                 {
                                     ?>
-                                    <a href="<?php echo site_url('pedidos'); ?>" class="btn btn-default">Reset</a>
+                                    <a href="<?php echo site_url('entregas'); ?>" class="btn btn-default">Reset</a>
                                     <?php
                                 }
                             ?>
@@ -60,26 +60,53 @@
                 <th>No</th>
 		<th>NombreCliente</th>
 		<th>NumFactura</th>
+		<th>FechaEntrega</th>
+		<th>Direccion</th>
 		<th>Estado</th>
-		<th>Id Encargado Fk</th>
+		<th>Nombre Transportista</th>
+		<th>Nombre Vendedor</th>
+        <th>Observaciones</th>
 		<th>Action</th>
             </tr><?php
-            foreach ($pedidos_data as $pedidos)
+            foreach ($entregas_data as $entregas)
             {
+                $this->db->select ( 'first_name, last_name' );
+                $this->db->from ( 'usuarios' );
+                $this->db->where ( 'id', $entregas->id_encargado_fk );
+
+                $query = $this->db->get ();
+                // print_r($query->result());
+                $result = $query->result_array();
+                $nombreEncargado = $result[0]['first_name'] . " " . $result[0]['last_name'];
+
+                $this->db->select ( 'first_name, last_name' );
+                $this->db->from ( 'usuarios' );
+                $this->db->where ( 'id', $entregas->id_vendedor_fk );
+
+                $query = $this->db->get ();
+                // print_r($query->result());
+                $result = $query->result_array();
+                $nombreVendedor = $result[0]['first_name'] . " " . $result[0]['last_name'];
+
+
                 ?>
                 <tr>
 			<td width="80px"><?php echo ++$start ?></td>
-			<td><?php echo $pedidos->nombreCliente ?></td>
-			<td><?php echo $pedidos->numFactura ?></td>
-			<td><?php if ($pedidos->estado === '0') { echo 'En espera'; } else if ($pedidos->estado === '1') { echo 'En ruta'; } else if ($pedidos->estado === '2') { echo 'Entregado'; } ?></td>
-			<td><?php echo $pedidos->id_encargado_fk ?></td>
+			<td><?php echo $entregas->nombreCliente ?></td>
+			<td><?php echo $entregas->numFactura ?></td>
+			<td><?php echo $entregas->fechaEntrega ?></td>
+			<td><?php echo $entregas->direccion ?></td>
+			<td><?php if ($entregas->estado === '0') { echo 'En espera'; } else if ($entregas->estado === '1') { echo 'En ruta'; } else if ($entregas->estado === '2') { echo 'Entregado'; } ?></td>
+			<td><?php echo $nombreEncargado ?></td>
+			<td><?php echo $nombreVendedor ?></td>
+            <td><?php echo $entregas->observaciones ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
-				echo anchor(site_url('pedidos/read/'.$pedidos->id),'Read'); 
+				echo anchor(site_url('entregas/read/'.$entregas->id),'Read'); 
 				echo ' | '; 
-				echo anchor(site_url('pedidos/update/'.$pedidos->id),'Update'); 
+				echo anchor(site_url('entregas/update/'.$entregas->id),'Update'); 
 				echo ' | '; 
-				echo anchor(site_url('pedidos/delete/'.$pedidos->id),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+				echo anchor(site_url('entregas/delete/'.$entregas->id),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
 				?>
 			</td>
 		</tr>
@@ -95,5 +122,8 @@
                 <?php echo $pagination ?>
             </div>
         </div>
+
     </body>
 </html>
+
+

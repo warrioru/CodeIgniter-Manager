@@ -77,7 +77,7 @@
 			<td><?php echo $usuarios->first_name ?></td>
 			<td><?php echo $usuarios->last_name ?></td>
 			<td><?php if ($usuarios->is_active === '1') { echo 'True'; } else { echo 'False'; } ?></td>
-			<td><?php if ($usuarios->id_role_fk === '1') { echo 'Admin'; } else { echo 'Vendedor'; } ?></td>
+			<td><?php if ($usuarios->id_role_fk === '1') { echo 'Admin'; } else if ($usuarios->id_role_fk === '2') { echo 'Vendedor'; } else if ($usuarios->id_role_fk === '3') { echo 'Transportista'; } ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
 				echo anchor(site_url('usuarios/read/'.$usuarios->id),'Read'); 
