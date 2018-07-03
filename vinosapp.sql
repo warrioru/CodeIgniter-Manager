@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.2
--- https://www.phpmyadmin.net/
+-- version 4.5.4.1deb2ubuntu2
+-- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 14, 2016 at 03:50 AM
--- Server version: 5.7.12
--- PHP Version: 5.5.34
+-- Generation Time: Jul 04, 2018 at 01:01 AM
+-- Server version: 5.7.22-0ubuntu0.16.04.1
+-- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,156 +23,59 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `accesorios`
+-- Table structure for table `usuarios`
 --
 
-CREATE TABLE `accesorios` (
+CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(50) DEFAULT NULL,
-  `imagenAcc` text,
-  `precio` float DEFAULT NULL,
-  `descripcion` text
+  `email` varchar(60) NOT NULL,
+  `first_name` varchar(35) NOT NULL,
+  `last_name` varchar(35) NOT NULL,
+  `password` varchar(60) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `id_role_fk` int(11) NOT NULL,
+  `urlFoto` varchar(40) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `accesorios`
+-- Dumping data for table `usuarios`
 --
 
-INSERT INTO `accesorios` (`id`, `nombre`, `imagenAcc`, `precio`, `descripcion`) VALUES
-(5, 'Estuche Iphone', 'http://localhost/AppVinos/uploads/accesorios/copa.jpg', 17.8, 'Estuche chevere');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `libros`
---
-
-CREATE TABLE `libros` (
-  `id` int(11) NOT NULL,
-  `imagenLibro` text,
-  `titulo` varchar(50) DEFAULT NULL,
-  `autor` varchar(50) DEFAULT NULL,
-  `anio` varchar(50) DEFAULT NULL,
-  `editor` varchar(50) DEFAULT NULL,
-  `isbn` varchar(50) DEFAULT NULL,
-  `idioma` varchar(50) DEFAULT NULL,
-  `precio` varchar(50) DEFAULT NULL,
-  `numPaginas` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `libros`
---
-
-INSERT INTO `libros` (`id`, `imagenLibro`, `titulo`, `autor`, `anio`, `editor`, `isbn`, `idioma`, `precio`, `numPaginas`) VALUES
-(24, 'http://localhost/AppVinos/uploads/libros/cocteles.jpg', 'Cocteles', 'Cocteles INC', '2013', 'Alguien', '020349', 'Espanol', '21.50', '35');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `publicidad`
---
-
-CREATE TABLE `publicidad` (
-  `id` int(11) NOT NULL,
-  `nombre` text,
-  `imagenPublicidad` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `publicidad`
---
-
-INSERT INTO `publicidad` (`id`, `nombre`, `imagenPublicidad`) VALUES
-(2, 'nova', 'http://localhost/AppVinos/uploads/publicidad/Tinto-frente1.jpg');
-
--- --------------------------------------------------------
---
--- Table structure for table `vinos`
---
-
-CREATE TABLE `vinos` (
-  `id` int(11) NOT NULL,
-  `nombre` text NOT NULL,
-  `bodega` text,
-  `tipo` varchar(45) DEFAULT NULL,
-  `tipoVarios` varchar(50) NOT NULL,
-  `cepa` text,
-  `anio` int(11) DEFAULT NULL,
-  `pais` varchar(40) DEFAULT NULL,
-  `imagen` text,
-  `color` text,
-  `nariz` text,
-  `boca` text,
-  `maridaje` text,
-  `precio` float DEFAULT NULL,
-  `descripcion` text,
-  `esPremium` BOOLEAN NULL DEFAULT FALSE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `vinos`
---
-
-INSERT INTO `vinos` (`id`, `nombre`, `bodega`, `tipo`, `tipoVarios`, `cepa`, `anio`, `pais`, `imagen`, `color`, `nariz`, `boca`, `maridaje`, `precio`, `descripcion`) VALUES
-(3, 'Vino Rosado', '', 'Vino Rosado', '', 'Pinot Noir,Pinot Gris', 2012, 'Argentina', 'http://localhost/AppVinos/uploads/vinos/Tinto-frente.jpg', 'bueno', 'chevere', 'ca', 'Sushi', 17.5, 'Buen vino'),
-(4, 'Vino Arabe', 'bodega arbve', 'Vino Blanco', '', 'Sauvignon Blanc', 2002, 'Marruecos', 'http://divinowines.com.ec/contenido/uploads/vinos/vinoRosado.png', 'ro', 'e', 'l', 'jk', 2.4, 'll');
+INSERT INTO `usuarios` (`id`, `email`, `first_name`, `last_name`, `password`, `is_active`, `id_role_fk`, `urlFoto`) VALUES
+(1, 'admin', 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 1, 1, ''),
+(3, 'info@divinowines.com.ec', 'Info', 'Info', '596f99b1603783be3eb20c0ee922a888', 1, 2, ''),
+(4, 'hola@hola.com', 'Hoal', 'Hola', '81dc9bdb52d04dc20036dbd8313ed055', 1, 3, NULL),
+(5, 'email@f.com', 'Transety', 'Transporte', '81dc9bdb52d04dc20036dbd8313ed055', 1, 3, NULL);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `accesorios`
+-- Indexes for table `usuarios`
 --
-ALTER TABLE `accesorios`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `libros`
---
-ALTER TABLE `libros`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `publicidad`
---
-ALTER TABLE `publicidad`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `vinos`
---
-ALTER TABLE `vinos`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_role_fk` (`id_role_fk`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `accesorios`
+-- AUTO_INCREMENT for table `usuarios`
 --
-ALTER TABLE `accesorios`
+ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT for table `libros`
---
-ALTER TABLE `libros`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
---
--- AUTO_INCREMENT for table `publicidad`
---
-ALTER TABLE `publicidad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `vinos`
---
-ALTER TABLE `vinos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `usuario_fk_1` FOREIGN KEY (`id_role_fk`) REFERENCES `roles` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
