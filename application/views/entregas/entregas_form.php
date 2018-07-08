@@ -3,7 +3,6 @@
 <?php require __DIR__.'/../bootstrap.php';?>
 <head>
     <title>Divino</title>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>application/js/jquery.datetimepicker.css"/>
 
 </head>
 <body>
@@ -79,8 +78,11 @@
                         <div class="form-group">
                             <label for="datetime">FechaEntrega <?php echo form_error('fechaEntrega') ?></label>
                             <!-- <input type="datetime-local" class="form-control" name="fechaEntrega" id="fechaEntrega" placeholder="FechaEntrega" value="<?php echo $fechaEntrega; ?>" /> -->
-                            <input type="text" id="demo"/>
-
+                            <div class="input-group date form_datetime col-md-5" data-date="" data-date-format="dd MM yyyy - HH:ii p" data-link-field="fechaEntrega">
+                                <input class="form-control" size="16" type="text" value="" placeholder="<?php echo $fechaEntrega; ?>" readonly>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                            </div>
+                            <input type="hidden" id="fechaEntrega" name="fechaEntrega" value="<?php echo $fechaEntrega; ?>" /><br/>
                         </div>
                         <div class="form-group">
                             <label for="varchar">Direccion <?php echo form_error('direccion') ?></label>
@@ -128,6 +130,25 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    var d = new Date.parse('tomorrow').set({hour: 6});
+
+    $('.form_datetime').datetimepicker({
+        language:  'es',
+        weekStart: 1,
+        todayBtn:  0,
+        autoclose: 1,
+        todayHighlight: 0,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1,
+        startDate: d,
+        minuteStep: 10,
+        format: 'dd-MM-yyyy hh:ii',
+        linkFormat: 'dd-MM-yyyy hh:ii'
+    });
+
+</script>
 
 </body>
 </html>

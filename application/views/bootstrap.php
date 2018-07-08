@@ -8,7 +8,7 @@
 	href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="<?php echo base_url();?>assets/bootstrap/css/styles.css">
-
+    <link href="<?php echo base_url();?>assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 <!--Icons-->
 <script src="<?php echo base_url();?>assets/js/lumino.glyphs.js"></script>
 
@@ -73,8 +73,16 @@
 	</div>
 	<!--/.sidebar-->
 
-	<script src="<?php echo base_url();?>assets/js/jquery-1.11.2.min.js"></script>
-	<script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
+<!--    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+<!--	<script src="--><?php //echo base_url();?><!--assets/js/bootstrap.js"></script>-->
+
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap-datetimepicker.es.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/date.js" charset="UTF-8"></script>
+
+
 	<script>
 		!function ($) {
 			$(document).on("click","ul.nav li.parent > a > span.icon", function(){		  
