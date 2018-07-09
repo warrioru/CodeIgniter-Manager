@@ -51,7 +51,7 @@
     $result = $query->result_array();
     $optionsVendedor = '';
     foreach ($result as $vendedor) {
-    if ($id_vendedor_fk === $encargado['id']) {
+    if ($id_vendedor_fk === $vendedor['id']) {
         $optionsVendedor .= '<option value=' . $vendedor['id'] . ' selected>' . $vendedor['first_name'] . " " . $vendedor['last_name'] . '</option>';
     } else {
         $optionsVendedor .= '<option value=' . $vendedor['id'] . '>' . $vendedor['first_name'] . " " . $vendedor['last_name'] . '</option>';
