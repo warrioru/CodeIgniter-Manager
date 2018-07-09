@@ -38,6 +38,7 @@ class Usuarios_model extends CI_Model
 	$this->db->or_like('password', $q);
 	$this->db->or_like('is_active', $q);
 	$this->db->or_like('id_role_fk', $q);
+	$this->db->or_like('urlFoto', $q);
 	$this->db->from($this->table);
         return $this->db->count_all_results();
     }
@@ -52,6 +53,7 @@ class Usuarios_model extends CI_Model
 	$this->db->or_like('password', $q);
 	$this->db->or_like('is_active', $q);
 	$this->db->or_like('id_role_fk', $q);
+	$this->db->or_like('urlFoto', $q);
 	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }

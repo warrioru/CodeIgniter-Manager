@@ -34,6 +34,7 @@
 	    <tr><td>Last Name</td><td><?php echo $last_name; ?></td></tr>
 	    <tr><td>Is Active</td><td><?php if ($is_active === '1') { echo 'True'; } else { echo 'False'; } ?></td></tr>
 	    <tr><td>Id Role Fk</td><td><?php if ($id_role_fk === '1') { echo 'Admin'; } else { echo 'Vendedor'; } ?></td></tr>
+	    <tr><td>Foto</td><td><img width="64px" height="64px" src="<?php echo $urlFoto; ?>" /></td></tr>
 	    <tr><td></td><td><a href="<?php echo site_url('usuarios') ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>
 	</div>

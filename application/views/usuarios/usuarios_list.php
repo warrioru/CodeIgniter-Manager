@@ -66,6 +66,7 @@
 		<th>Last Name</th>
 		<th>Is Active</th>
 		<th>Id Role Fk</th>
+		<th>Url Foto</th>
 		<th>Action</th>
             </tr><?php
             foreach ($usuarios_data as $usuarios)
@@ -78,6 +79,7 @@
 			<td><?php echo $usuarios->last_name ?></td>
 			<td><?php if ($usuarios->is_active === '1') { echo 'True'; } else { echo 'False'; } ?></td>
 			<td><?php if ($usuarios->id_role_fk === '1') { echo 'Admin'; } else if ($usuarios->id_role_fk === '2') { echo 'Vendedor'; } else if ($usuarios->id_role_fk === '3') { echo 'Transportista'; } ?></td>
+			<td><img width="64px" height="64px" src="<?php echo $usuarios->urlFoto; ?>" /></td>
 			<td style="text-align:center" width="200px">
 				<?php 
 				echo anchor(site_url('usuarios/read/'.$usuarios->id),'Read'); 

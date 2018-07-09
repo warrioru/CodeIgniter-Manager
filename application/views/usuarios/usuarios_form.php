@@ -62,6 +62,16 @@
                 <option value="3">Transportista</option>
 			</select>
         </div>
+	    <div class="form-group">
+            <label for="varchar">Url Foto <?php echo form_error('urlFoto') ?></label>
+            <!-- <input type="text" class="form-control" name="id_role_fk" id="id_role_fk" placeholder="Id Role Fk" value="<?php echo $id_role_fk; ?>" /> -->
+            <img id="blah" alt="Imagen" src="<?php echo $urlFoto; ?>"
+                 width=64 height=64 /> <input type="file" name="urlFoto"
+                                                id="urlFoto"
+                                                onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
+            <input type="hidden" name="prueba"
+                   value="<?php echo $urlFoto; ?>">
+        </div>
 	    <input type="hidden" name="id" value="<?php echo $id; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
 	    <a href="<?php echo site_url('usuarios') ?>" class="btn btn-default">Cancel</a>

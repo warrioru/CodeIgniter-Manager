@@ -10,6 +10,8 @@ class Usuarios extends CI_Controller
         parent::__construct();
         $this->load->model('Usuarios_model');
         $this->load->library('form_validation');
+        $this->load->database ();
+        $this->load->helper ( 'url' );
     }
 
     public function index()
@@ -55,6 +57,7 @@ class Usuarios extends CI_Controller
 		'password' => $row->password,
 		'is_active' => $row->is_active,
 		'id_role_fk' => $row->id_role_fk,
+        'urlFoto' =>  $row->urlFoto
 	    );
             $this->load->view('usuarios/usuarios_read', $data);
         } else {
@@ -75,6 +78,7 @@ class Usuarios extends CI_Controller
 	    'password' => set_value('password'),
 	    'is_active' => set_value('is_active'),
 	    'id_role_fk' => set_value('id_role_fk'),
+	    'urlFoto' => set_value('urlFoto'),
 	);
         $this->load->view('usuarios/usuarios_form', $data);
     }
@@ -86,6 +90,7 @@ class Usuarios extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->create();
         } else {
+            $url = $this->do_upload ();
             $data = array(
 		'email' => $this->input->post('email',TRUE),
 		'first_name' => $this->input->post('first_name',TRUE),
@@ -93,11 +98,47 @@ class Usuarios extends CI_Controller
 		'password' => md5($this->input->post('password',TRUE)),
 		'is_active' => $this->input->post('is_active',TRUE),
 		'id_role_fk' => $this->input->post('id_role_fk',TRUE),
+		'urlFoto' => $url,
 	    );
 
             $this->Usuarios_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('usuarios'));
+        }
+    }
+
+    private function do_upload() {
+        if (empty ( $_FILES ['urlFoto'] ['name'] )) {
+            return "no";
+        }
+        $image_path = realpath(APPPATH . '../uploads/usuarios');
+
+        $config ['upload_path'] = $image_path;
+        $config ['allowed_types'] = 'gif|jpg|png|jpeg';
+        /*
+         * $config['max_size'] = '100';
+         * $config['max_width'] = '1024';
+         * $config['max_height'] = '768';
+         */
+
+        $this->load->library ( 'upload', $config );
+        $field_name = "urlFoto";
+
+        if (! $this->upload->do_upload ( $field_name )) {
+            $error = array (
+                'error' => $this->upload->display_errors ()
+            );
+
+
+            // $this->load->view('upload_form', $error);
+        } else {
+            $data = array (
+                'upload_data' => $this->upload->data ()
+            );
+            $upload_data = $this->upload->data ();
+
+            // $this->load->view('upload_success', $data);
+            return "http://localhost:8888/contenido/uploads/usuarios/" . $upload_data ['file_name'];
         }
     }
     
@@ -116,6 +157,7 @@ class Usuarios extends CI_Controller
 		'password' => set_value('password', $row->password),
 		'is_active' => set_value('is_active', $row->is_active),
 		'id_role_fk' => set_value('id_role_fk', $row->id_role_fk),
+		'urlFoto' => set_value('urlFoto', $row->urlFoto),
 	    );
             $this->load->view('usuarios/usuarios_form', $data);
         } else {
@@ -131,6 +173,12 @@ class Usuarios extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->update($this->input->post('id', TRUE));
         } else {
+            $url = $this->do_upload ();
+
+            if ($url == "no") {
+                $url = $this->input->post ( 'prueba', TRUE );
+            }
+
 			$newPass = $this->input->post('password',TRUE);
 			if (strlen($newPass) != 32) {
 				//hash to md5
@@ -143,6 +191,7 @@ class Usuarios extends CI_Controller
 		'password' => $newPass,
 		'is_active' => $this->input->post('is_active',TRUE),
 		'id_role_fk' => $this->input->post('id_role_fk',TRUE),
+		'urlFoto' => $url,
 	    );
 
             $this->Usuarios_model->update($this->input->post('id', TRUE), $data);
@@ -173,6 +222,9 @@ class Usuarios extends CI_Controller
 	$this->form_validation->set_rules('password', 'password', 'trim|required');
 	$this->form_validation->set_rules('is_active', 'is active', 'trim|required');
 	$this->form_validation->set_rules('id_role_fk', 'id role fk', 'trim|required');
+	if (empty ( $_FILES ['urlFoto'] ['name'] ) && $_POST ['prueba'] == "") {
+	    $this->form_validation->set_rules ( 'urlFoto', 'urlFoto', 'required' );
+	}
 
 	$this->form_validation->set_rules('id', 'id', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
