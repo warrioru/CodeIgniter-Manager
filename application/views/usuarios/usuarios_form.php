@@ -49,8 +49,8 @@
             <label for="tinyint">Is Active <?php echo form_error('is_active') ?></label>
             <!-- <input type="text" class="form-control" name="is_active" id="is_active" placeholder="Is Active" value="<?php echo $is_active; ?>" /> -->
             <select class="form-control" name="is_active" id="is_active">
-				<option value="1">True</option>
-				<option value="0">False</option>
+				<option value="1" >True</option>
+				<option value="0" <?php if (!$is_active) { echo 'selected'; }  else echo ''; ?> >False</option>
 			</select>
         </div>
 	    <div class="form-group">
@@ -58,8 +58,8 @@
             <!-- <input type="text" class="form-control" name="id_role_fk" id="id_role_fk" placeholder="Id Role Fk" value="<?php echo $id_role_fk; ?>" /> -->
             <select class="form-control" name="id_role_fk" id="id_role_fk">
 				<option value="1">Admin</option>
-				<option value="2">Vendedor</option>
-                <option value="3">Transportista</option>
+				<option value="2" <?php if ($id_role_fk === "2") { echo 'selected'; }  else echo ''; ?>>Vendedor</option>
+                <option value="3" <?php if ($id_role_fk === "3") { echo 'selected'; }  else echo ''; ?>>Transportista</option>
 			</select>
         </div>
 	    <div class="form-group">

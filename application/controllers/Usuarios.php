@@ -138,7 +138,7 @@ class Usuarios extends CI_Controller
             $upload_data = $this->upload->data ();
 
             // $this->load->view('upload_success', $data);
-            return "http://localhost:8888/contenido/uploads/usuarios/" . $upload_data ['file_name'];
+            return "http://localhost/contenido/uploads/usuarios/" . $upload_data ['file_name'];
         }
     }
     
